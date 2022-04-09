@@ -935,7 +935,8 @@ function Test-TargetResource
 
             foreach ($san in $sanList)
             {
-                if ($san -like 'dns*')
+                # On some locale, the SAN doesn't begin with DNS so we use *dns* (e.g. french => Nom DNS)
+                if ($san -like '*dns*')
                 {
                     # This SAN is a DNS name
                     $correctDns += $san.split('=')[1]
@@ -950,7 +951,8 @@ function Test-TargetResource
 
                 foreach ($san in $currentSanList)
                 {
-                    if ($san -like 'dns*')
+                    # On some locale, the SAN doesn't begin with DNS so we use *dns* (e.g. french => Nom DNS)
+                    if ($san -like '*dns*')
                     {
                         # This SAN is a DNS name
                         $currentDns += $san.split('=')[1]
